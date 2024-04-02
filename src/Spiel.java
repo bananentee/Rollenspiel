@@ -66,13 +66,11 @@ public class Spiel {
      */
     private void spielStart() {
         anzahlRunden++;
-        held.angriffswertBerechnen();
-        monster.angriffswertBerechnen();
-        showInGameStats();
         while (!spielBeendet) {
             Kampfregel.kampf(held, monster);
         }
         System.out.println("Der Kampf ist beendet!");
+        showInGameStats();
         showStats();
     }
 
@@ -132,8 +130,8 @@ public class Spiel {
 
     public void showInGameStats() {
         System.out.println("----------------------");
-        System.out.println("Angriffswert Held " + held.getAngriffswert());
-        System.out.println("Angriffswert Monster " + monster.getAngriffswert());
+        System.out.println("Angriffswert Held " + held.angriffswertBerechnen());
+        System.out.println("Angriffswert Monster " + monster.angriffswertBerechnen());
         System.out.println("----------------------");
     }
 

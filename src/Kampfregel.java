@@ -13,10 +13,8 @@ public class Kampfregel {
      * @param pMonster importiertes Objekt der Klasse Monster, welches im weiteren Verlauf verwendet wird.
      */
     public static void kampf(Held pHeld, Monster pMonster) {
-        int diff;
-        if (pHeld.getAngriffswert() != pMonster.getAngriffswert()) {
-            if (pHeld.getAngriffswert() > pMonster.getAngriffswert()) {
-                diff = pHeld.getAngriffswert() - pMonster.getAngriffswert();
+        if (pHeld.angriffswertBerechnen() != pMonster.angriffswertBerechnen()) {
+            if (pHeld.angriffswertBerechnen() > pMonster.angriffswertBerechnen()) {
                 if (pMonster.getLebenspunkte() != 0) {
                     pMonster.verliereLebenspunkt();
                     System.out.println("||Monster verliert Lebenspunkt! " + pMonster.getLebenspunkte());
@@ -40,6 +38,4 @@ public class Kampfregel {
             Spiel.setSpielBeendet(true);
         }
     }
-
-    //TODO Impl. eines Wahrscheinlichkeitssystems
 }

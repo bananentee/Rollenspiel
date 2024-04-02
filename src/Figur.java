@@ -36,7 +36,4 @@ public abstract class Figur {
     public int getLebenspunkte() {
         return lebenspunkte;
     }
-    public int getAngriffswert() {
-        return angriffswert;
-    }
 }
