@@ -102,7 +102,7 @@ public class Spiel {
     private void erstelleMonster() {
         System.out.println("Lebenspunkte des Monsters: ");
         int lebenspunkteMonster = in.nextInt();
-        monster = new Monster(lebenspunkteMonster);
+        monster = new Monster(lebenspunkteMonster, view);
         System.out.println("======================");
         System.out.println("Neues Monster wurde erstellt!");
         System.out.println("Anzahl der Lebenspunkte: " + lebenspunkteMonster);

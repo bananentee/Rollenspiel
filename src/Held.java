@@ -9,6 +9,7 @@ public class Held extends Figur {
     private int staerke;
     private Waffe waffe;
     private View view;
+    private Picture avatar;
 
     public Held(String pName, int pLebenspunkte, Waffe pWaffe, View pView) {
         view = pView;
@@ -17,10 +18,16 @@ public class Held extends Figur {
         waffe = pWaffe;
 
         checkData();
-        new Picture(20,view.getHeight() - 20 - 224,"ass/hero.png");
+        avatar = new Picture(20,view.getHeight() - 20 - 224,"ass/hero.png");
     }
 
     public int angriffswertBerechnen() { // strength is randomized; cap at 6
+//        avatar.moveTo(view.getWidth() / 2, view.getHeight() - 20 - 224);
+        avatar.move(view.getWidth() / 2);
+        view.wait(1000);
+        avatar.moveTo(20, view.getHeight() - 20 - 224);
+
+        view.wait(1000);
         if (waffe != null) {
             staerke = Wuerfel.wuerfeln(6);
             angriffswert = staerke + waffe.getBonus();
