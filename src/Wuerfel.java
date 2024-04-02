@@ -4,12 +4,7 @@ import java.util.Random;
  * @author Sven Ibe
  */
 public class Wuerfel {
-    static private Random rand = new Random();
-    private int anzahlSeiten;
-
-    Wuerfel(int pAnzahlSeiten) {
-        anzahlSeiten = pAnzahlSeiten;
-    }
+    private static Random rand = new Random();
 
     public static int wuerfeln(int pAnzahlSeiten) {
         return rand.nextInt(pAnzahlSeiten);

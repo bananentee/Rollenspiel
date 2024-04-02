@@ -35,6 +35,7 @@ public class Kampfregel {
         } else {
             //unentschieden
             System.out.println("||Pariert!");
+            Spiel.setSpielBeendet(true);
         }
     }
 }
