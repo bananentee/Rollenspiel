@@ -9,11 +9,13 @@ public abstract class Figur {
     protected String name;
     protected int lebenspunkte;
     protected int angriffswert;
+    protected int beginningLP;
 
     /* constructors */
 
     /* abstract methods */
-    public abstract int angriffswertBerechnen();
+    public abstract void angriffswertBerechnen();
+    public abstract void move();
 
     /* object methods */
     public int verliereLebenspunkt() {
@@ -29,11 +31,18 @@ public abstract class Figur {
         }
     }
 
+    public void resetLP () {
+        lebenspunkte = beginningLP;
+    }
+
     /* getters and setters */
     public String getName() {
         return name;
     }
     public int getLebenspunkte() {
         return lebenspunkte;
+    }
+    public int getAngriffswert() {
+        return angriffswert;
     }
 }

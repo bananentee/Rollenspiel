@@ -5,15 +5,29 @@ import sas.View;
  * @author Sven Ibe
  */
 public class Monster extends Figur {
-
-    public Monster(int pLebenspunkte, View view) {
+    private Picture avatar;
+    private View view;
+    public Monster(int pLebenspunkte, View pView) {
         lebenspunkte = pLebenspunkte;
+        beginningLP = pLebenspunkte;
+        view = pView;
         name = "Monster";
+
         checkData();
-        new Picture(view.getWidth()/2,view.getHeight() - 20 - 224,"ass/monster.png");
+        avatar = new Picture((double) pView.getWidth() /2,pView.getHeight() - 20 - 224,"ass/monster.png");
     }
 
-    public int angriffswertBerechnen() {
-        return angriffswert = Wuerfel.wuerfeln(10);
+    public void angriffswertBerechnen() {
+        angriffswert = Wuerfel.wuerfeln(10);
     }
+
+    @Override
+    public void move() {
+        avatar.move(-((double) view.getWidth() / 2));
+        view.wait(500);
+        avatar.move((double) view.getWidth() / 2);
+        view.wait(500);
+    }
+
+
 }

@@ -23,7 +23,7 @@ public class Waffe {
             case "Stahl":
                 materialWert = 3;
                 break;
-            case "Diamand":
+            case "Diamant":
                 materialWert = 4;
                 break;
             default :

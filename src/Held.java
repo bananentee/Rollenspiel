@@ -15,25 +15,28 @@ public class Held extends Figur {
         view = pView;
         name = pName;
         lebenspunkte = pLebenspunkte;
+        beginningLP = pLebenspunkte;
         waffe = pWaffe;
-
         checkData();
-        avatar = new Picture(20,view.getHeight() - 20 - 224,"ass/hero.png");
+
+        avatar = new Picture(20,view.getHeight() - 224,"ass/hero.png");
     }
 
-    public int angriffswertBerechnen() { // strength is randomized; cap at 6
-//        avatar.moveTo(view.getWidth() / 2, view.getHeight() - 20 - 224);
-        avatar.move(view.getWidth() / 2);
-        view.wait(1000);
-        avatar.moveTo(20, view.getHeight() - 20 - 224);
-
-        view.wait(1000);
+    public void angriffswertBerechnen() { // strength is randomized; cap at 6
         if (waffe != null) {
             staerke = Wuerfel.wuerfeln(6);
             angriffswert = staerke + waffe.getBonus();
         }
-        return angriffswert;
     }
+
+    @Override
+    public void move() {
+        avatar.move((double) view.getWidth() / 2);
+        view.wait(500);
+        avatar.move(-((double) view.getWidth() / 2));
+        view.wait(500);
+    }
+
     public int erhoeheSiege() {
         return gewonneneKaempfe++;
     }
