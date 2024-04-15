@@ -1,12 +1,10 @@
 public class Wartebank {
-    private int length;
-    private Held [] patient;
+    private final Held [] patient;
 
     private int patientAnzahl;
 
     public Wartebank (int length){
-        this.length = length;
-        patient = new Held[this.length];
+        patient = new Held[length];
     }
 
     public void addNewPatient (Held pHeld) {
@@ -34,8 +32,8 @@ public class Wartebank {
 
     public Held getFirstInTheLine () {
         boolean warteBankVoll = false;
-        for (int i = 0; i < patient.length; i++) {
-            if (patient[i] != null) {
+        for (Held value : patient) {
+            if (value != null) {
                 warteBankVoll = true;
                 break;
             }

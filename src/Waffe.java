@@ -2,17 +2,14 @@
  * @author Sven Ibe
  */
 public class Waffe {
-    private int bonus;
     private int materialWert;
-    private int magie;
-    private String material;
+    private final String material;
     
-    public Waffe (String pMaterial, int pMagie) {
+    public Waffe (String pMaterial) {
         material = pMaterial;
-        magie = pMagie;
     }
     
-    private void bonusBerechnen () {
+    private void calcMaterialWert() {
         switch (material) {
             case "Holz":
                 materialWert = 1;
@@ -30,11 +27,10 @@ public class Waffe {
                 materialWert = 0;
                 //falsches Material wurde angegeben
         }
-        bonus = materialWert + magie;
     }
     
-    public int getBonus () {
-        bonusBerechnen();
-        return bonus;
+    public int getMaterialWert() {
+        calcMaterialWert();
+        return materialWert;
     }
 }

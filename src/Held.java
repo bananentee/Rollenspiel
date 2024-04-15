@@ -6,10 +6,7 @@ import sas.View;
  */
 public class Held extends Figur {
     private int gewonneneKaempfe;
-    private int staerke;
-    private Waffe waffe;
-    private View view;
-    private Picture avatar;
+    private final Waffe waffe;
 
     public Held(String pName, int pLebenspunkte, Waffe pWaffe, View pView) {
         view = pView;
@@ -18,31 +15,37 @@ public class Held extends Figur {
         beginningLP = pLebenspunkte;
         waffe = pWaffe;
         checkData();
-
-        avatar = new Picture(20,view.getHeight() - 224,"ass/hero.png");
+        initImg();
     }
-
+    @Override
     public void angriffswertBerechnen() { // strength is randomized; cap at 6
         if (waffe != null) {
-            staerke = Wuerfel.wuerfeln(6);
-            angriffswert = staerke + waffe.getBonus();
+            int staerke = Wuerfel.wuerfeln(6);
+            angriffswert = staerke + waffe.getMaterialWert();
         }
     }
 
     @Override
-    public void move() {
-        avatar.move((double) view.getWidth() / 2);
+    public void move(int distance) {
+        avatar.move(distance);
         view.wait(500);
-        avatar.move(-((double) view.getWidth() / 2));
+        avatar.move(-(distance));
         view.wait(500);
     }
+    @Override
+    protected void initImg () {
+        state0 = new Picture (20,view.getHeight() - 320 -20,"ass/hero/sprite_hero0.png" );
+        state1 = new Picture (20,view.getHeight() - 320 -20,"ass/hero/sprite_hero1.png" );
+        state2 = new Picture (20,view.getHeight() - 320 -20,"ass/hero/sprite_hero2.png" );
+        state3 = new Picture (20,view.getHeight() - 320 -20,"ass/hero/sprite_hero3.png" );
+        initStates();
+    }
 
-    public int erhoeheSiege() {
-        return gewonneneKaempfe++;
+    public void erhoeheSiege() {
+        gewonneneKaempfe++;
     }
     public int getGewonneneKaempfe() {
         return gewonneneKaempfe;
     }
-
 
 }

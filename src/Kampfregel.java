@@ -19,10 +19,11 @@ public class Kampfregel {
             if (pHeld.getAngriffswert() > pMonster.getAngriffswert()) {
                 if (pMonster.getLebenspunkte() != 0) {
                     pMonster.verliereLebenspunkt();
-                    System.out.println("||Monster verliert Lebenspunkt! " + pMonster.getLebenspunkte());
-                    pHeld.move();
+                    System.out.println("||Monster verliert Lebenspunkt! ");
+                    printStats(pHeld, pMonster);
+                    pHeld.move(pHeld.getView().getWidth() - 320 - 20);
                 } else {
-                    System.out.println("Der Held hat den Drachen besiegt");
+                    System.out.println("|||Der Held hat den Drachen besiegt");
                     pHeld.erhoeheSiege();
                     Spiel.setSpielBeendet(true);
                 }
@@ -30,15 +31,24 @@ public class Kampfregel {
                 if (pHeld.getLebenspunkte() != 0) {
                     pHeld.verliereLebenspunkt();
                     System.out.println("||Held verliert Lebenspunkt! " + pHeld.getLebenspunkte());
-                    pMonster.move();
+                    printStats(pHeld, pMonster);
+                    pMonster.move(pHeld.getView().getWidth() - 320 - 20);
                 } else {
-                    System.out.println("Der Held ist gestorben");
+                    System.out.println("|||Der Held ist gestorben");
                     Spiel.setSpielBeendet(true);
                 }
             }
         } else {
             //unentschieden
             System.out.println("||Pariert!");
+            printStats(pHeld, pMonster);
         }
+    }
+
+    private static void printStats(Held pHeld, Monster pMonster) {
+        System.out.println("|LP Held: " + pHeld.getLebenspunkte());
+        System.out.println("|LP Monster: " + pMonster.getLebenspunkte());
+        System.out.println("|AW Held: " + pHeld.getAngriffswert());
+        System.out.println("|AW Monster: "+ pMonster.getAngriffswert());
     }
 }

@@ -1,3 +1,6 @@
+import sas.Picture;
+import sas.Sprite;
+import sas.View;
 
 public abstract class Figur {
     /* static variables */
@@ -7,28 +10,59 @@ public abstract class Figur {
     /* attributes */
 
     protected String name;
+    protected View view;
+    protected Sprite avatar;
     protected int lebenspunkte;
     protected int angriffswert;
     protected int beginningLP;
+    protected Picture state0, state1, state2, state3;
 
     /* constructors */
 
     /* abstract methods */
     public abstract void angriffswertBerechnen();
-    public abstract void move();
+    public abstract void move(int distance);
+    protected abstract void initImg();
+
 
     /* object methods */
-    public int verliereLebenspunkt() {
+    public void verliereLebenspunkt() {
         if (lebenspunkte != 0) {
             lebenspunkte--;
         }
-        return lebenspunkte;
     }
 
     public void checkData (){
         if (lebenspunkte <= 0 || name == null || name.matches("[0-9]+")) {
             System.exit(404);
         }
+    }
+
+    public void idle (View view) {
+        state0.setHidden(false);
+        view.wait(100);
+        state0.setHidden(true);
+        state1.setHidden(false);
+        view.wait(100);
+        state1.setHidden(true);
+        state2.setHidden(false);
+        view.wait(100);
+        state2.setHidden(true);
+        state3.setHidden(false);
+        view.wait(100);
+        state3.setHidden(true);
+        state0.setHidden(false);
+    }
+
+    protected void initStates () {
+        avatar = new Sprite(state0);
+        avatar.add(state1);
+        avatar.add(state2);
+        avatar.add(state3);
+        state0.setHidden(false);
+        state1.setHidden(true);
+        state2.setHidden(true);
+        state3.setHidden(true);
     }
 
     public void resetLP () {
@@ -45,4 +79,8 @@ public abstract class Figur {
     public int getAngriffswert() {
         return angriffswert;
     }
+    public View getView (){
+        return view;
+    }
+
 }

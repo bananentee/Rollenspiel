@@ -1,3 +1,4 @@
+import sas.Picture;
 import sas.Rectangle;
 import sas.View;
 import sasio.Label;
@@ -26,8 +27,8 @@ public class Spiel {
     private int anzahlRunden;
     private Held held;
     private Monster monster;
-    private View view;
-    private Label label;
+    private final View view;
+    private final Label label;
 
     /* constructor */
     public Spiel() {
@@ -46,8 +47,8 @@ public class Spiel {
                 Color.BLUE); // first frame of the label (therefore Punktzahl = 0)
 
         /* method calls from below */
-        erstelleHeld("Held", 5);
-        erstelleMonster(5);
+        erstelleHeld();
+        erstelleMonster();
         spielStart(); //needs to be called after the object inits
         startGui(); //needs to be called after the GUI related objects inits
     }
@@ -63,11 +64,13 @@ public class Spiel {
      */
     private void spielStart() {
         anzahlRunden++;
+        System.out.println("|||Kampflog:");
         while (!spielBeendet) {
+            held.idle(view);
+            monster.idle(view);
             Kampfregel.kampf(held, monster);
         }
-        System.out.println("Der Kampf ist beendet!");
-        showInGameStats();
+        System.out.println("|||Der Kampf ist beendet!");
         showStats();
     }
 
@@ -84,20 +87,20 @@ public class Spiel {
     }
 
     //* INIT OF OBJECTS */
-    private void erstelleHeld(String pName, int pLebenspunkte) {
-        held = new Held(pName, pLebenspunkte, new Waffe("Stahl", 0), view);
+    private void erstelleHeld() {
+        held = new Held("Held", 5, new Waffe("Stahl"), view);
         System.out.println("======================");
         System.out.println("Neuer Held wurde erstellt!");
-        System.out.println("Name: " + pName);
-        System.out.println("Anzahl der Lebenspunkte: " + pLebenspunkte);
+        System.out.println("Name: " + "Held");
+        System.out.println("Anzahl der Lebenspunkte: " + 5);
         System.out.println("======================");
     }
 
-    private void erstelleMonster(int pLebenspunkte) {
-        monster = new Monster(pLebenspunkte, view);
+    private void erstelleMonster() {
+        monster = new Monster(5, view);
         System.out.println("======================");
         System.out.println("Neues Monster wurde erstellt!");
-        System.out.println("Anzahl der Lebenspunkte: " + pLebenspunkte);
+        System.out.println("Anzahl der Lebenspunkte: " + 5);
         System.out.println("======================");
     }
 
@@ -109,6 +112,7 @@ public class Spiel {
                 Color.GREEN
         );
         ground.setHidden(false);
+        new Picture((double) view.getWidth() /2,view.getHeight() - 20 - 640, 640, 640,"ass/tree.png");
     }
 
     //* LOG OF STATS */
@@ -118,13 +122,6 @@ public class Spiel {
         System.out.println("gewonnene Kämpfe: " + held.getGewonneneKaempfe());
         System.out.println("verlorene Kämpfe: " + (anzahlRunden - held.getGewonneneKaempfe()));
         System.out.println("======================");
-    }
-
-    public void showInGameStats() {
-        System.out.println("----------------------");
-        System.out.println("Angriffswert Held " + held.getAngriffswert());
-        System.out.println("Angriffswert Monster " + monster.getAngriffswert());
-        System.out.println("----------------------");
     }
 
     //* RESET */
