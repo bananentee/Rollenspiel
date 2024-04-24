@@ -1,5 +1,6 @@
 import sas.Picture;
 import sas.Rectangle;
+import sas.Text;
 import sas.View;
 import sasio.Label;
 import java.awt.*;
@@ -28,7 +29,7 @@ public class Spiel {
     private Held held;
     private Monster monster;
     private final View view;
-    private final Label label;
+    private final Text label;
 
     /* constructor */
     public Spiel() {
@@ -40,9 +41,8 @@ public class Spiel {
         //* construction of Background */
         constructBG();
         //* construction of Foreground */
-        label = new Label(
-                view.getWidth() / 2 - 150, view.getHeight() / 2 - 50,
-                300, 70,
+        label = new Text(
+                10, 10,
                 "Punktzahl: 0",
                 Color.BLUE); // first frame of the label (therefore Punktzahl = 0)
 
@@ -79,7 +79,7 @@ public class Spiel {
             if (view.keyPressed('r')) {
                 Spiel.setSpielBeendet(false);
                 reset();
-                label.setLabelText("Punktzahl: " + held.getGewonneneKaempfe());
+                label.setText("Punktzahl: " + held.getGewonneneKaempfe());
             }
             Spiel.setSpielBeendet(true);
         }
