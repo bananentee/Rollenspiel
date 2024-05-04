@@ -12,6 +12,7 @@ public abstract class Figur {
     protected String name;
     protected View view;
     protected Sprite avatar;
+    protected Healthbar healthbar;
     protected int lebenspunkte;
     protected int angriffswert;
     protected int beginningLP;
@@ -29,6 +30,7 @@ public abstract class Figur {
     public void verliereLebenspunkt() {
         if (lebenspunkte != 0) {
             lebenspunkte--;
+            healthbar.decreaseLP();
         }
     }
 
@@ -65,8 +67,13 @@ public abstract class Figur {
         state3.setHidden(true);
     }
 
+    public void initHealthBar (int offsetX, int offsetY) {
+        healthbar = new Healthbar(this, offsetX, offsetY);
+    }
+
     public void resetLP () {
         lebenspunkte = beginningLP;
+        healthbar.resetHP(); //TODO delete the old red bar from the view (somehow)
     }
 
     /* getters and setters */
@@ -81,6 +88,15 @@ public abstract class Figur {
     }
     public View getView (){
         return view;
+    }
+    public double getPositionX () {
+        return avatar.getShapeX();
+    }
+    public double getPositionY () {
+        return avatar.getShapeY();
+    }
+    public int getBeginningLP() {
+        return beginningLP;
     }
 
 }

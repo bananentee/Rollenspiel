@@ -14,8 +14,10 @@ public class Held extends Figur {
         lebenspunkte = pLebenspunkte;
         beginningLP = pLebenspunkte;
         waffe = pWaffe;
+
         checkData();
         initImg();
+        initHealthBar(15,-25);
     }
     @Override
     public void angriffswertBerechnen() { // strength is randomized; cap at 6
@@ -28,8 +30,10 @@ public class Held extends Figur {
     @Override
     public void move(int distance) {
         avatar.move(distance);
+        healthbar.updatePos(distance);
         view.wait(500);
-        avatar.move(-(distance));
+        avatar.move(-distance);
+        healthbar.updatePos(-distance);
         view.wait(500);
     }
     @Override

@@ -14,6 +14,7 @@ public class Monster extends Figur {
 
         checkData();
         initImg();
+        initHealthBar(70,-25);
     }
     @Override
     public void angriffswertBerechnen() {
@@ -22,9 +23,11 @@ public class Monster extends Figur {
 
     @Override
     public void move(int distance) {
-        avatar.move(-(distance));
+        avatar.move(-distance);
+        healthbar.updatePos(-distance);
         view.wait(500);
         avatar.move(distance);
+        healthbar.updatePos(distance);
         view.wait(500);
     }
     @Override

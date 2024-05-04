@@ -2,7 +2,6 @@ import sas.Picture;
 import sas.Rectangle;
 import sas.Text;
 import sas.View;
-import sasio.Label;
 import java.awt.*;
 
 /**
@@ -44,11 +43,12 @@ public class Spiel {
         label = new Text(
                 10, 10,
                 "Punktzahl: 0",
-                Color.BLUE); // first frame of the label (therefore Punktzahl = 0)
+                Color.DARK_GRAY); // first frame of the label (therefore Punktzahl = 0)
+
 
         /* method calls from below */
-        erstelleHeld();
-        erstelleMonster();
+        erstelleHeld("Held", 5);
+        erstelleMonster(5);
         spielStart(); //needs to be called after the object inits
         startGui(); //needs to be called after the GUI related objects inits
     }
@@ -69,6 +69,7 @@ public class Spiel {
             held.idle(view);
             monster.idle(view);
             Kampfregel.kampf(held, monster);
+            label.setText("Punktzahl: " + held.getGewonneneKaempfe());
         }
         System.out.println("|||Der Kampf ist beendet!");
         showStats();
@@ -79,7 +80,6 @@ public class Spiel {
             if (view.keyPressed('r')) {
                 Spiel.setSpielBeendet(false);
                 reset();
-                label.setText("Punktzahl: " + held.getGewonneneKaempfe());
             }
             Spiel.setSpielBeendet(true);
         }
@@ -87,20 +87,20 @@ public class Spiel {
     }
 
     //* INIT OF OBJECTS */
-    private void erstelleHeld() {
-        held = new Held("Held", 5, new Waffe("Stahl"), view);
+    private void erstelleHeld(String name, int lp) {
+        held = new Held(name, lp, new Waffe("Stahl"), view);
         System.out.println("======================");
         System.out.println("Neuer Held wurde erstellt!");
         System.out.println("Name: " + "Held");
-        System.out.println("Anzahl der Lebenspunkte: " + 5);
+        System.out.println("Anzahl der Lebenspunkte: " + lp);
         System.out.println("======================");
     }
 
-    private void erstelleMonster() {
-        monster = new Monster(5, view);
+    private void erstelleMonster(int lp) {
+        monster = new Monster(lp, view);
         System.out.println("======================");
         System.out.println("Neues Monster wurde erstellt!");
-        System.out.println("Anzahl der Lebenspunkte: " + 5);
+        System.out.println("Anzahl der Lebenspunkte: " + lp);
         System.out.println("======================");
     }
 
