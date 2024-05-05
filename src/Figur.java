@@ -73,7 +73,7 @@ public abstract class Figur {
 
     public void resetLP () {
         lebenspunkte = beginningLP;
-        healthbar.resetHP(); //TODO delete the old red bar from the view (somehow)
+        healthbar.resetHP();
     }
 
     /* getters and setters */
