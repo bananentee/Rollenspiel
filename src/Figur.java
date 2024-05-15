@@ -35,7 +35,7 @@ public abstract class Figur {
     }
 
     public void checkData (){
-        if (lebenspunkte <= 0 || name == null || name.matches("[0-9]+")) {
+        if (lebenspunkte <= 0 || name == null || name.matches("\\d+")) {
             System.exit(404);
         }
     }
